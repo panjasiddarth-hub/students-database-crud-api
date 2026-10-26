@@ -2,6 +2,12 @@
 
 A beginner-friendly student records app built with **Python**, **FastAPI**, and **SQLite**. It includes a simple web screen for adding, searching, editing, and deleting student records, plus API documentation. The optional Ollama extension from the assignment is not included.
 
+## Live demo
+
+- Student manager: <https://students-database-crud-api-2cds.onrender.com/>
+- API documentation: <https://students-database-crud-api-2cds.onrender.com/docs>
+- Health check: <https://students-database-crud-api-2cds.onrender.com/health>
+
 ## Requirements
 
 - Python 3.10 or newer
