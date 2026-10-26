@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071527">
+  <title>Student Registry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Student Registry home">
+        <span class="brand-mark">SR</span>
+        <span><strong>STUDENT</strong><small>REGISTRY</small></span>
+      </a>
+      <a class="api-link" href="/docs" target="_blank" rel="noreferrer">API docs <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="live-dot"></span> STUDENT DATABASE · CRUD APP</p>
+          <h1>Every student,<br><span>in one place.</span></h1>
+          <p class="intro">A simple space to keep your student records clear, organized, and easy to find.</p>
+        </div>
+        <div class="hero-orbit" aria-hidden="true"><span class="orbit-ring"></span><span class="orbit-core">S</span><span class="orbit-star">✳</span></div>
+      </section>
+
+      <section class="workspace" aria-label="Student records">
+        <div class="section-heading">
+          <div><p class="eyebrow muted">YOUR DATABASE</p><h2>Student records <span id="student-count" class="count-badge">0</span></h2></div>
+          <button class="primary-button" id="add-student" type="button"><span aria-hidden="true">＋</span> Add student</button>
+        </div>
+
+        <div class="toolbar">
+          <label class="search-box"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search by name, course, or email" autocomplete="off"><kbd>⌘ K</kbd></label>
+          <span class="sort-label"><span class="live-dot"></span> All records</span>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>STUDENT</th><th>DATE OF BIRTH</th><th>COURSE</th><th>CONTACT</th><th><span class="sr-only">ACTIONS</span></th></tr></thead>
+            <tbody id="student-rows"></tbody>
+          </table>
+          <div id="empty-state" class="empty-state" hidden><span class="empty-icon">✳</span><h3>No students yet</h3><p>Add your first student to get started.</p><button class="text-button" id="empty-add" type="button">Add a student <span>→</span></button></div>
+          <div id="loading-state" class="loading-state">Loading your records<span class="loading-dots">...</span></div>
+        </div>
+        <p class="privacy-note"><span aria-hidden="true">◈</span> Use sample data for your demo. Avoid entering real student personal information.</p>
+      </section>
+    </main>
+    <footer><span>STUDENT REGISTRY</span><span>MADE FOR LEARNING <i>✳</i></span></footer>
+  </div>
+
+  <dialog id="student-dialog" class="student-dialog">
+    <form id="student-form">
+      <div class="dialog-heading"><div><p class="eyebrow muted" id="form-kicker">NEW RECORD</p><h2 id="form-title">Add a student</h2></div><button class="icon-button" id="close-dialog" type="button" aria-label="Close">×</button></div>
+      <label class="field">Full name <span>*</span><input name="name" required maxlength="120" placeholder="e.g. Aanya Patel"></label>
+      <label class="field">Date of birth <span>*</span><input name="date_of_birth" type="date" required></label>
+      <div class="field-row"><label class="field">Email<input name="email" type="email" maxlength="254" placeholder="aanya@example.com"></label><label class="field">Phone<input name="phone" type="tel" maxlength="30" placeholder="+91 98765 43210"></label></div>
+      <label class="field">Course<input name="course" maxlength="120" placeholder="e.g. Python Backend"></label>
+      <p class="form-hint">Add an email or a phone number so the student can be contacted.</p>
+      <p class="form-error" id="form-error" role="alert" hidden></p>
+      <div class="dialog-actions"><button class="secondary-button" id="cancel-dialog" type="button">Cancel</button><button class="primary-button" type="submit" id="save-student">Save student <span aria-hidden="true">→</span></button></div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

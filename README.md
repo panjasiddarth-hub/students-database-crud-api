@@ -1,6 +1,6 @@
 # Students Database CRUD API
 
-A beginner-friendly student records backend built with **Python**, **FastAPI**, and **SQLite**. It supports creating, listing, filtering, viewing, updating, and deleting records. The optional Ollama extension from the assignment is not included.
+A beginner-friendly student records app built with **Python**, **FastAPI**, and **SQLite**. It includes a simple web screen for adding, searching, editing, and deleting student records, plus API documentation. The optional Ollama extension from the assignment is not included.
 
 ## Requirements
 
@@ -26,6 +26,8 @@ uvicorn main:app --reload
 ```
 
 The database file `students.db` is created beside `main.py` the first time the app starts. To use another location, set `STUDENT_DATABASE_PATH` before starting the app.
+
+Open the student manager at <http://127.0.0.1:8000/>. The API documentation is at <http://127.0.0.1:8000/docs>.
 
 ## API documentation
 
@@ -77,11 +79,23 @@ curl -X DELETE http://127.0.0.1:8000/students/1
 
 Student IDs are generated automatically. A missing record returns `404`, a duplicate email returns `409`, and invalid input returns `422` with details. List results are ordered by ID and support `limit` (1-100) and `offset` pagination.
 
+## Deploy a free demo on Render
+
+1. Push this repository to GitHub.
+2. In Render, choose **New + → Blueprint** and connect this repository.
+3. Render reads `render.yaml` and creates the web service. Wait for the deploy to finish, then open its `onrender.com` URL.
+
+The free demo uses SQLite on temporary storage. Records are for demonstration and may be erased when the service restarts or redeploys; free services can also sleep when idle. The local app continues to use a persistent `students.db` file. For a hosted app that must keep records between restarts, use a persistent disk or move the database to a managed database.
+
+Use fictional records in the public demo. Do not enter real student personal information.
+
 ## Project layout
 
 ```text
 .
 ├── main.py            # API routes, validation, and SQLite persistence
+├── static/            # Student manager interface (HTML, CSS, JavaScript)
+├── render.yaml        # Render deployment settings
 ├── requirements.txt   # Python dependencies
 ├── .gitignore         # Excludes local database and environment files
 └── README.md          # Setup and API usage

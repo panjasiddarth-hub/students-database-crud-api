@@ -8,6 +8,8 @@ import sqlite3
 from typing import Annotated
 
 from fastapi import FastAPI, HTTPException, Query, Response, status
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 
@@ -53,6 +55,8 @@ app = FastAPI(
     version="1.0.0",
     lifespan=lifespan,
 )
+STATIC_DIRECTORY = Path(__file__).with_name("static")
+app.mount("/static", StaticFiles(directory=STATIC_DIRECTORY), name="static")
 
 
 class StudentFields(BaseModel):
@@ -139,7 +143,7 @@ def fetch_student(student_id: int) -> Student:
 
 @app.get("/", tags=["Health"])
 def root():
-    return {"message": "Students Database API", "docs": "/docs", "health": "/health"}
+    return FileResponse(STATIC_DIRECTORY / "index.html")
 
 
 @app.get("/health", tags=["Health"])
